@@ -55,4 +55,7 @@ void plnm_init_quadratic(polynomial_t *y, coeff_t a, coeff_t b, coeff_t c);
 */
 int plnm_roots_quadratic(polynomial_t *y, root_t *buffer);
 
+// Scales a polynomial in place by coeff x
+void plnm_scale(polynomial_t *y, coeff_t x);
+
 #endif
