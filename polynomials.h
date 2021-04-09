@@ -15,8 +15,8 @@
 
 #define PLNM_A_VERY_SMALL_NUMBER 0.00001
 
-#define PLNM_IS_CLOSE(x, t) (abs((x) - (t)) < PLNM_A_VERY_SMALL_NUMBER)
-#define PLNM_IS_ZERO(x) (abs(x) < PLNM_A_VERY_SMALL_NUMBER)
+#define PLNM_IS_CLOSE(x, t) (fabs((x) - (t)) < PLNM_A_VERY_SMALL_NUMBER)
+#define PLNM_IS_ZERO(x) (fabs(x) < PLNM_A_VERY_SMALL_NUMBER)
 
 
 
