@@ -17,12 +17,14 @@ int main() {
 	print_polynomial(&quad);
 	printf("\n\n");
 	
-	// Finding some roots
+	// gets the order of a polynomial
+	int order = plnm_order(&quad);
 	
+	// Finding some roots
 	root_t roots[2];
 	int root_count = plnm_roots(&quad, roots);
 	
-	printf("This polynomial has %d solutions:\n", root_count);
+	printf("This polynomial of order %d has %d solutions:\n", order, root_count);
 	
 	// printing the full complex number form, which isn't always necessary.
 	// using creal and cimag *is* necessary, since we're using C99's <complex.h>.
