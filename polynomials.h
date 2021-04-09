@@ -44,6 +44,14 @@ int plnm_order(polynomial_t *y);
 */
 int plnm_roots(polynomial_t *y, root_t *buffer);
 
+/*
+	Multiplies two polynomials and inserts them into the result.
+	result will have plnm_init() called on it.
+	
+	Returns the order of the resultant polynomial.
+*/
+int plnm_product(polynomial_t *left, polynomial_t *right, polynomial_t *result);
+
 // Initializes a linear polynomial following y = mx + c
 void plnm_init_linear(polynomial_t *y, coeff_t m, coeff_t c);
 

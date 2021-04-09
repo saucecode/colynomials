@@ -81,6 +81,26 @@ int plnm_roots_quadratic(polynomial_t *y, root_t *buffer) {
 	return -1;
 }
 
+int plnm_product(polynomial_t *left, polynomial_t *right, polynomial_t *result) {
+	int order_left = plnm_order(left);
+	int order_right = plnm_order(right);
+	int order_result = order_left + order_right;
+	
+	plnm_init(result, order_result);
+	for(int i = 1; i <= order_left + 1; i += 1) {
+		int left_exp = order_left - i + 1;
+		
+		for(int j = 1; j <= order_right + 1; j += 1) {
+			int right_exp = order_right - j + 1;
+			
+			int exponent = left_exp + right_exp;
+			(*result)[order_result - exponent + 1] += (*left)[i] * (*right)[j];
+		}
+	}
+	
+	return order_result;
+}
+
 int plnm_order(polynomial_t *y) {
 	return *((unsigned int *) *y);
 }
