@@ -26,6 +26,15 @@ void plnm_init_quadratic(polynomial_t *y, coeff_t a, coeff_t b, coeff_t c) {
 	(*y)[3] = c;
 }
 
+void plnm_init_cubic(polynomial_t *y, coeff_t a, coeff_t b, coeff_t c, coeff_t d) {
+	plnm_init(y, 3);
+	
+	(*y)[1] = a;
+	(*y)[2] = b;
+	(*y)[3] = c;
+	(*y)[4] = d;
+}
+
 int plnm_roots(polynomial_t *y, root_t *buffer) {
 	if (plnm_order(y) == 1) {
 		if (PLNM_IS_ZERO( (*y)[1] )) return -2;

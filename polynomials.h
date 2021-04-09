@@ -21,7 +21,10 @@
 
 
 
-// Initializes a polynomial structure.
+/*
+	Initializes a polynomial structure.
+	This will call realloc() on the polynomial_t.
+*/
 void plnm_init(polynomial_t *y, int order);
 
 // Returns the polynomial's order.
@@ -46,6 +49,9 @@ void plnm_init_linear(polynomial_t *y, coeff_t m, coeff_t c);
 
 // Initializes a quadratic polynomial following y = ax^2 + bx + c
 void plnm_init_quadratic(polynomial_t *y, coeff_t a, coeff_t b, coeff_t c);
+
+// Initializes a cubic polynomial following y = ax^3 + bx^2 + cx + d
+void plnm_init_cubic(polynomial_t *y, coeff_t a, coeff_t b, coeff_t c, coeff_t d);
 
 /*
 	Solves a quadratic using the quadratic formula, to return either
