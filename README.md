@@ -1,6 +1,6 @@
 # colynomials
 
-Polynomial math library in C, and with one of those annoying names that has to have the host language in it. Supports complex roots and floating-point coefficients.
+Polynomial math library in C, and with one of those annoying names that has to have the host language in it. Only supports __real polynomials__, so real (floating point) coefficients and complex roots.
 
 Read `polynomials.h` for the functions currently implemented.
 
