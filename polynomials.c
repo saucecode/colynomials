@@ -75,3 +75,9 @@ int plnm_roots_quadratic(polynomial_t *y, root_t *buffer) {
 int plnm_order(polynomial_t *y) {
 	return *((unsigned int *) *y);
 }
+
+void plnm_scale(polynomial_t *y, coeff_t x)
+{
+    for (int i = 0; i <= plnm_order(y); i++)
+        (*y)[i + 1] *= x;
+}
