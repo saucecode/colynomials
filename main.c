@@ -34,6 +34,22 @@ int main() {
 		printf("y = %f\n", creal(roots[solution]));
 		*/
 	}
+	printf("\n");
+	
+	
+	// Creating a cubic
+	polynomial_t cub = NULL;
+	plnm_init_cubic(&cub, 25, 0, 15, 0);
+	
+	printf("y = ");
+	print_polynomial(&cub);
+	printf("\n\n");
+	
+	// Scaling the cubic by a constant
+	printf("Scaled down by a factor of 1/5:\n");
+	plnm_scale(&cub, 1/5.0);
+	printf("y/5 = ");
+	print_polynomial(&cub);
 	
 	printf("\n");
 	
