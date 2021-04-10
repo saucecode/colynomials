@@ -1,0 +1,23 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install test dependencies
+      run: |
+        apt install criterion
+        python3 -m pip install gcovr
+    - name: make
+      run: make
+    - name: make tests_run
+      run: make tests_run
