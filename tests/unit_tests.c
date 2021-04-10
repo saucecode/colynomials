@@ -2,6 +2,7 @@
 #include <criterion/criterion.h>
 
 #include <string.h>
+#include <stdio.h>
 
 Test(plnm_scale, quadraticValue1)
 {
@@ -52,4 +53,56 @@ Test(plnm_copy, big_copy)
 	cr_expect(memcmp(copy, big, plnm_sizeof(&big)) == 0);
 	
 	free(big);
+	free(copy);
+}
+
+Test(plnm_product, big_product)
+{
+	// Multiplication of two polynomials, one of order 23 and another of order 17
+	// to yield a result of order 40. PLNM_IS_CLOSE() macro is used for the
+	// comparison
+	coeff_t coeffs_left[] = {
+		0.62,-0.80, 0.72, -0.52, 0.76, -0.60,
+		0.22, 0.13, -0.74, -0.20, 0.73, 0.90,
+		-0.35, -0.69, -0.25, 0.13, 0.56, 0.83,
+		0.62, -0.77, -0.49, 0.32, -0.48, 0.48
+	};
+	coeff_t coeffs_right[] = {
+		0.94, -0.33, 0.10, -0.75, -0.22, 0.86,
+		0.63, 0.04, 0.10, -0.34, 0.52, -0.73,
+		-0.23, 0.63, 0.78, -0.03, -0.88, -0.73
+	};
+	coeff_t coeffs_solution[] = {
+		0.58280, -0.95660, 1.00280, -1.27140, 1.42160, -0.69760,
+		0.41500, -0.32600, -0.39730, 0.10020, 1.14070, -0.21230,
+		1.05480, -2.03210, -0.69610, -0.32560, 2.25070, 1.82250,
+		-0.66400, -2.12980, -0.62640, -0.07570, -0.35290, 2.09580,
+		1.58770, 0.93310, -1.51620, -2.64140, -0.51770, 0.76230,
+		1.70660, 2.00170, -1.14780, -1.54070, -1.54900, 0.07650,
+		0.91170, 0.46490, 0.17440, -0.07200, -0.35040
+	};
+	polynomial_t left = NULL;
+	plnm_init(&left, 23);
+	// random coefficients
+	memcpy(&left[1], coeffs_left, sizeof(coeffs_left));
+	
+	polynomial_t right = NULL;
+	plnm_init(&right, 17);
+	memcpy(&right[1], coeffs_right, sizeof(coeffs_right));
+	
+	cr_assert(plnm_order(&left) == 23);
+	cr_assert(plnm_order(&right) == 17);
+	
+	polynomial_t result = NULL;
+	plnm_product(&left, &right, &result);
+	cr_assert(plnm_order(&result) == 40);
+	
+	for(int i = 1; i < plnm_order(&result) + 2; i++) {
+		// printf("%d\t%f\t%f\n", i, result[i], coeffs_solution[i-1]);
+		cr_assert(PLNM_IS_CLOSE(result[i], coeffs_solution[i-1]));
+	}
+	
+	free(left);
+	free(right);
+	free(result);
 }
