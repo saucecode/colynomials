@@ -8,15 +8,21 @@ OBJ             =       $(SRC:.c=.o)
 
 NAME            =       example
 
+NAMETESTS       =       unit_tests
+
+NAMEDEBUG       =       debug
+
 RM              +=      -r
 
 CC              =       gcc
 
-CFLAGS          +=      -g -W -Wall -Wextra
+CFLAGS          +=      -W -Wall -Wextra
 
 CPPFLAGS        +=      -I include/
 
 CFLAGSTEST      =       -coverage -lcriterion
+
+CFLAGSDEBUG     =       -g3
 
 LDFLAGS	        +=      -lm
 
@@ -33,14 +39,16 @@ clean:
 	$(RM) */*.gcno
 
 fclean: clean
-	$(RM) $(NAME)
-	$(RM) unit_tests
+	$(RM) $(NAME) $(NAMETESTS) $(NAMEDEBUG)
 
 re:	fclean all
 
 tests_run:
-	$(CC) -o unit_tests $(SRC) $(SRCTEST) $(CFALGS) $(CPPFLAGS) $(CFLAGSTEST) $(LDFLAGS)
-	./unit_tests
+	$(CC) -o $(NAMETESTS) $(SRC) $(SRCTEST) $(CFLAGS) $(CPPFLAGS) $(CFLAGSTEST) $(LDFLAGS)
+	./$(NAMETESTS)
 	gcovr -e $(SRCTEST)
 
-.PHONY:	all clean fclean re tests_run
+debug:
+	$(CC) -o $(NAMEDEBUG) $(MAIN) $(SRC) $(CFLAGS) $(CFLAGSDEBUG) $(CPPFLAGS) $(LDFLAGS)
+
+.PHONY:	all clean fclean re tests_run debug
