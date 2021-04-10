@@ -1,24 +1,24 @@
-MAIN		=	main.c
+MAIN            =       main.c
 
-SRC		=	polynomials.c
+SRC             =       polynomials.c
 
-SRCTEST		=	tests/unit_tests.c
+SRCTEST         =       tests/unit_tests.c
 
-OBJ		=	$(SRC:.c=.o)
+OBJ             =       $(SRC:.c=.o)
 
-NAME		=	example
+NAME            =       example
 
-RM		+=	-r
+RM              +=      -r
 
-CC		=	gcc
+CC              =       gcc
 
-CFLAGS		+=	-W -Wall -Wextra
+CFLAGS          +=      -W -Wall -Wextra
 
-CPPFLAGS	+=	-I include/
+CPPFLAGS        +=      -I include/
 
-CFLAGSTEST	=	-coverage -lcriterion
+CFLAGSTEST      =       -coverage -lcriterion
 
-LDFLAGS		+=	-lm
+LDFLAGS	        +=      -lm
 
 all:	$(NAME)
 
@@ -27,11 +27,10 @@ $(NAME):	$(OBJ)
 
 clean:
 	$(RM) $(OBJ)
-	$(RM) *~
-	$(RM) */*~
-	$(RM) *.gc*
-	$(RM) */*.gc*
-	$(RM) vgcore.*
+	$(RM) *.gcda
+	$(RM) *.gcno
+	$(RM) */*.gcda
+	$(RM) */*.gcno
 
 fclean: clean
 	$(RM) $(NAME)
@@ -40,7 +39,7 @@ fclean: clean
 re:	fclean all
 
 tests_run:
-	$(CC) -o unit_tests $(SRC) $(SRCTEST) $(CFLAGSTEST) $(LDFLAGS)
+	$(CC) -o unit_tests $(SRC) $(SRCTEST) $(CFALGS) $(CPPFLAGS) $(CFLAGSTEST) $(LDFLAGS)
 	./unit_tests
 	gcovr -e $(SRCTEST)
 
