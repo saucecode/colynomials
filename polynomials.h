@@ -3,15 +3,9 @@
 
 #include <tgmath.h>
 
-#ifndef COEFFICIENT_UNIT
-#define COEFFICIENT_UNIT double
-#endif
-
-#define ROOT_UNIT COEFFICIENT_UNIT complex
-
-#define coeff_t COEFFICIENT_UNIT
-#define root_t ROOT_UNIT
-#define polynomial_t coeff_t*
+#define coeff_t double
+#define root_t coeff_t complex
+typedef coeff_t* polynomial_t; // typedef because its a pointer type
 
 #define PLNM_A_VERY_SMALL_NUMBER 0.00001
 
