@@ -12,7 +12,7 @@ RM              +=      -r
 
 CC              =       gcc
 
-CFLAGS          +=      -W -Wall -Wextra
+CFLAGS          +=      -g -W -Wall -Wextra
 
 CPPFLAGS        +=      -I include/
 
