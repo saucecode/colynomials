@@ -18,7 +18,7 @@
 #define PLNM_IS_CLOSE(x, t) (fabs((x) - (t)) < PLNM_A_VERY_SMALL_NUMBER)
 #define PLNM_IS_ZERO(x) (fabs(x) < PLNM_A_VERY_SMALL_NUMBER)
 
-
+#define plnm_sizeof(p) ((2+plnm_order(p))*sizeof(coeff_t))
 
 
 /*
@@ -51,6 +51,13 @@ int plnm_roots(polynomial_t *y, root_t *buffer);
 	Returns the order of the resultant polynomial.
 */
 int plnm_product(polynomial_t *left, polynomial_t *right, polynomial_t *result);
+
+/*
+	Copies the content of the source polynomial into the other.
+	This will call plnm_init() on the copy if they are not already
+	the same order. i.e plnm_order(copy) == plnm_order(source).
+*/
+void plnm_copy(polynomial_t *copy, polynomial_t *source);
 
 // Initializes a linear polynomial following y = mx + c
 void plnm_init_linear(polynomial_t *y, coeff_t m, coeff_t c);

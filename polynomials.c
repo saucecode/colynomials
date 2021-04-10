@@ -110,3 +110,12 @@ void plnm_scale(polynomial_t *y, coeff_t x)
     for (int i = 0; i <= plnm_order(y); i++)
         (*y)[i + 1] *= x;
 }
+
+void plnm_copy(polynomial_t *copy, polynomial_t *source) {
+	if(!source) return;
+	
+	if (*copy == NULL || plnm_order(copy) == plnm_order(source))
+		plnm_init(copy, plnm_order(source));
+	
+	memcpy(copy, source, plnm_sizeof(source));
+}
