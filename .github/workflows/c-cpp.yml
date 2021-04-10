@@ -17,6 +17,7 @@ jobs:
       run: |
         wget https://github.com/Snaipe/Criterion/releases/download/v2.3.3/criterion-v2.3.3-linux-x86_64.tar.bz2
         tar xjf criterion-v2.3.3-linux-x86_64.tar.bz2
+        cd criterion-v2.3.3
         sudo sh -c "echo "/usr/local/lib" > /etc/ld.so.conf.d/criterion.conf"
         sudo cp -r include/* /usr/local/include
         sudo cp -r lib/* /usr/local/lib
