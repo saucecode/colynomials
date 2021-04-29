@@ -16,7 +16,7 @@ RM              +=      -r
 
 CC              =       gcc
 
-CFLAGS          +=      -W -Wall -Wextra
+CFLAGS          +=      -Wall -Wextra
 
 CPPFLAGS        +=      -I include/
 
