@@ -117,5 +117,5 @@ void plnm_copy(polynomial_t *copy, polynomial_t *source) {
 	if (*copy == NULL || plnm_order(copy) == plnm_order(source))
 		plnm_init(copy, plnm_order(source));
 	
-	memcpy(copy, source, plnm_sizeof(source));
+	memcpy(*copy, *source, plnm_sizeof(source));
 }
