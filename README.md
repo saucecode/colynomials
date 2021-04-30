@@ -18,8 +18,8 @@ Coefficients are stored in descending order of order, i.e `2x^2 + 10x - 5` is st
 * Remeber that the polynomial is x^2, and therefor 10x is the second element (Discoraged)
 * Or, if you want your code to either be more readable, or just rely less on your memory: Assuming you know what element you want (eg. 10x), use plnm_order() to access the order, then just access the coefficent; eg:
  
- `unsigned int poly_order = plnm_order(&myPolynomial); 
+ ```unsigned int poly_order = plnm_order(&myPolynomial);```
  
- double coefficent_x = myPolynomial[poly_order + 1];`
+ ```double coefficent_x = myPolynomial[poly_order + 1];```
  
  , and then you can use it for whatever you want.
