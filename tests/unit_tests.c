@@ -4,7 +4,7 @@
 #include <string.h>
 #include <stdio.h>
 
-Test(plnm_scale, quadraticValue1)
+Test(plnm_scale, quadraticValue)
 {
 	polynomial_t quad = NULL;
 
