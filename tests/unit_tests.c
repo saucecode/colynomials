@@ -66,7 +66,7 @@ Test(plnm_roots, quadratic_two_real_roots)
 	root_t roots[2];
 	int root_count = plnm_roots(&quad, roots);
 	
-	cr_assert(root_count == 1);
+	cr_assert(root_count == 2);
 	cr_assert(PLNM_IS_CLOSE(creal(roots[0]), 4));
 	
 	free(quad);
