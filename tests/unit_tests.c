@@ -38,6 +38,23 @@ Test(plnm_copy, big_copy)
 	free(copy);
 }
 
+Test(plnm_roots, linear_root)
+{
+	polynomial_t line = NULL;
+	plnm_init_linear(&line, 0.5, 3);
+	
+	cr_assert(line[1] == 3);
+	cr_assert(line[2] == 0.5);
+	
+	root_t buffer;
+	int root_count = plnm_roots(&line, &buffer);
+	
+	cr_assert(root_count == 1);
+	cr_assert(buffer == -6);
+	
+	free(line);
+}
+
 Test(plnm_roots, quadratic_one_root)
 {
 	// The polynomial 2(x - 4)^2, expanded to 2x^2 - 16x + 32
