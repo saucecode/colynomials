@@ -14,32 +14,32 @@ void plnm_init(polynomial_t *y, int order) {
 void plnm_init_linear(polynomial_t *y, coeff_t m, coeff_t c) {
 	plnm_init(y, 1);
 	
-	(*y)[1] = m;
-	(*y)[2] = c;
+	(*y)[2] = m;
+	(*y)[1] = c;
 }
 
 void plnm_init_quadratic(polynomial_t *y, coeff_t a, coeff_t b, coeff_t c) {
 	plnm_init(y, 2);
 	
-	(*y)[1] = a;
+	(*y)[3] = a;
 	(*y)[2] = b;
-	(*y)[3] = c;
+	(*y)[1] = c;
 }
 
 void plnm_init_cubic(polynomial_t *y, coeff_t a, coeff_t b, coeff_t c, coeff_t d) {
 	plnm_init(y, 3);
 	
-	(*y)[1] = a;
-	(*y)[2] = b;
-	(*y)[3] = c;
-	(*y)[4] = d;
+	(*y)[4] = a;
+	(*y)[3] = b;
+	(*y)[2] = c;
+	(*y)[1] = d;
 }
 
 int plnm_roots(polynomial_t *y, root_t *buffer) {
 	if (plnm_order(y) == 1) {
 		if (PLNM_IS_ZERO( (*y)[1] )) return -2;
 		
-		buffer[0] = -(*y)[2]/(*y)[1];
+		buffer[0] = -(*y)[1]/(*y)[2];
 		return 1;
 		
 	} else if (plnm_order(y) == 2) {
@@ -55,25 +55,25 @@ int plnm_roots_quadratic(polynomial_t *y, root_t *buffer) {
 	if (plnm_order(y) != 2) return -3;
 	
 	// has a zero highest-order coefficient
-	if ((*y)[1] == 0) return -2;
+	if (PLNM_IS_ZERO((*y)[3])) return -2;
 	
 	polynomial_t p = *y;
-	coeff_t discriminant = p[2]*p[2] - 4 * p[1] * p[3];
+	coeff_t discriminant = p[2]*p[2] - 4 * p[3] * p[1];
 	
 	if (PLNM_IS_ZERO(discriminant)) {
-		buffer[0] = -p[2] / ((coeff_t) 2) / p[1];
+		buffer[0] = -p[2] / ((coeff_t) 2) / p[3];
 		
 		return 1;
 		
 	} else if (discriminant > 0) {
-		buffer[0] = (-p[2] + sqrt(discriminant)) / ((coeff_t) 2) / p[1];
-		buffer[1] = (-p[2] - sqrt(discriminant)) / ((coeff_t) 2) / p[1];
+		buffer[0] = (-p[2] + sqrt(discriminant)) / ((coeff_t) 2) / p[3];
+		buffer[1] = (-p[2] - sqrt(discriminant)) / ((coeff_t) 2) / p[3];
 		
 		return 2;
 		
 	} else if(discriminant < 0) {
-		buffer[0] = (-p[2] + sqrt(-discriminant) * I) / ((coeff_t) 2) / p[1];
-		buffer[1] = (-p[2] - sqrt(-discriminant) * I) / ((coeff_t) 2) / p[1];
+		buffer[0] = (-p[2] + sqrt(-discriminant) * I) / ((coeff_t) 2) / p[3];
+		buffer[1] = (-p[2] - sqrt(-discriminant) * I) / ((coeff_t) 2) / p[3];
 		
 		return 2;
 	}

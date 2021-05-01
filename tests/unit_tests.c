@@ -10,9 +10,9 @@ Test(plnm_scale, quadraticValue1)
 
 	plnm_init_quadratic(&quad, 2, 3, 5);
 	plnm_scale(&quad, 2);
-	cr_expect(quad[1] == 4);
-        cr_expect(quad[2] == 6);
-        cr_expect(quad[3] == 10);
+	cr_expect(quad[1] == 10);
+	cr_expect(quad[2] == 6);
+	cr_expect(quad[3] == 4);
 	free(quad);
 }
 
@@ -36,6 +36,58 @@ Test(plnm_copy, big_copy)
 	
 	free(big);
 	free(copy);
+}
+
+Test(plnm_roots, linear_root)
+{
+	polynomial_t line = NULL;
+	plnm_init_linear(&line, 0.5, 3);
+	
+	cr_assert(line[1] == 3);
+	cr_assert(line[2] == 0.5);
+	
+	root_t buffer;
+	int root_count = plnm_roots(&line, &buffer);
+	
+	cr_assert(root_count == 1);
+	cr_assert(buffer == -6);
+	
+	free(line);
+}
+
+Test(plnm_roots, quadratic_one_root)
+{
+	// The polynomial 2(x - 4)^2, expanded to 2x^2 - 16x + 32
+	// has exactly one root at x = 4.
+	polynomial_t quad = NULL;
+
+	plnm_init_quadratic(&quad, 2, -16, 32);
+	
+	root_t roots[2];
+	int root_count = plnm_roots(&quad, roots);
+	
+	cr_assert(root_count == 1);
+	cr_assert(PLNM_IS_CLOSE(roots[0], 4));
+	
+	free(quad);
+}
+
+Test(plnm_roots, quadratic_two_real_roots)
+{
+	// The polynomial (x + 17)^2 - 18^2, expanded to x^2 + 34x - 35
+	// has exactly two real roots at x = -35 and x = 1.
+	polynomial_t quad = NULL;
+
+	plnm_init_quadratic(&quad, 1, 34, -35);
+	
+	root_t roots[2];
+	int root_count = plnm_roots(&quad, roots);
+	
+	cr_assert(root_count == 2);
+	cr_assert(PLNM_IS_CLOSE(creal(roots[0]), 1));
+	cr_assert(PLNM_IS_CLOSE(creal(roots[1]), -35));
+	
+	free(quad);
 }
 
 Test(plnm_product, big_product)
