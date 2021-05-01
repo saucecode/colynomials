@@ -2,6 +2,7 @@
 #define _saucecodes_polynomials_h
 
 #include <tgmath.h>
+#include <stddef.h>
 
 #define coeff_t double
 #define root_t coeff_t complex
@@ -73,4 +74,6 @@ int plnm_roots_quadratic(polynomial_t *y, root_t *buffer);
 // Scales a polynomial in place by coeff x
 void plnm_scale(polynomial_t *y, coeff_t x);
 
+// Returns the member of polynomial y at position pos
+coeff_t plnm_at(polynomial_t *y, size_t pos);
 #endif

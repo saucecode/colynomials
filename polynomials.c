@@ -119,3 +119,10 @@ void plnm_copy(polynomial_t *copy, polynomial_t *source) {
 	
 	memcpy(*copy, *source, plnm_sizeof(source));
 }
+
+coeff_t plnm_at(polynomial_t *y, size_t pos)
+{
+	if (pos == 0 || plnm_order(y) + 1 < pos)
+		return 0;
+	return (*y)[pos];
+}

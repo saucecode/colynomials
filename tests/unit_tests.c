@@ -140,3 +140,22 @@ Test(plnm_product, big_product)
 	free(right);
 	free(result);
 }
+
+Test(plnm_at, basic_test)
+{
+    polynomial_t test = NULL;
+
+    plnm_init_linear(&test, 2, 3);
+    cr_assert(plnm_at(&test, 1) == 3);
+    cr_assert(plnm_at(&test, 2) == 2);
+    plnm_init_quadratic(&test, 4, 6, 8);
+    cr_assert(plnm_at(&test, 1) == 8);
+    cr_assert(plnm_at(&test, 2) == 6);
+    cr_assert(plnm_at(&test, 3) == 4);
+    plnm_init_cubic(&test, 1, 5, 7, 11);
+    cr_assert(plnm_at(&test, 1) == 11);
+    cr_assert(plnm_at(&test, 2) == 7);
+    cr_assert(plnm_at(&test, 3) == 5);
+    cr_assert(plnm_at(&test, 4) == 1);
+    free(test);
+}
