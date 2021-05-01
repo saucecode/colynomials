@@ -38,6 +38,40 @@ Test(plnm_copy, big_copy)
 	free(copy);
 }
 
+Test(plnm_roots, quadratic_one_root)
+{
+	// The polynomial 2(x - 4)^2, expanded to 2x^2 - 16x + 32
+	// has exactly one root at x = 4.
+	polynomial_t quad = NULL;
+
+	plnm_init_quadratic(&quad, 2, -16, 32);
+	
+	root_t roots[2];
+	int root_count = plnm_roots(&quad, roots);
+	
+	cr_assert(root_count == 1);
+	cr_assert(PLNM_IS_CLOSE(roots[0], 4));
+	
+	free(quad);
+}
+
+Test(plnm_roots, quadratic_two_real_roots)
+{
+	// The polynomial (x + 17)^2 - 18^2, expanded to x^2 + 34x - 35
+	// has exactly two real roots at x = -35 and x = 1.
+	polynomial_t quad = NULL;
+
+	plnm_init_quadratic(&quad, 1, 34, -35);
+	
+	root_t roots[2];
+	int root_count = plnm_roots(&quad, roots);
+	
+	cr_assert(root_count == 1);
+	cr_assert(PLNM_IS_CLOSE(creal(roots[0]), 4));
+	
+	free(quad);
+}
+
 Test(plnm_product, big_product)
 {
 	// Multiplication of two polynomials, one of order 23 and another of order 17
