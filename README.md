@@ -14,4 +14,4 @@ This project has no dependencies. Tests are written using [criterion](https://cr
 
 `polynomial_t` is a `double*` under the hood, but the first element is an `unsigned int` specifying the *order* of the polynomial. Therefore, `polynomial_t` can be treated as an array starting at 1. To access the order, use `plnm_order()` or simply `*((unsigned int *) polynomial)`.
 
-Coefficients are stored in descending order of order, i.e `2x^2 + 10x - 5` is stored as `[2, 10, -5]`.
+Coefficients are stored in **ascending order** of order, i.e `2x^2 + 10x - 5` is stored as `[-5, 10, 2]`.
