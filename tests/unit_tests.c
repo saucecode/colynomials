@@ -10,9 +10,9 @@ Test(plnm_scale, quadraticValue1)
 
 	plnm_init_quadratic(&quad, 2, 3, 5);
 	plnm_scale(&quad, 2);
-	cr_expect(quad[1] == 4);
+	cr_expect(quad[1] == 10);
 	cr_expect(quad[2] == 6);
-	cr_expect(quad[3] == 10);
+	cr_expect(quad[3] == 4);
 	free(quad);
 }
 
@@ -67,7 +67,8 @@ Test(plnm_roots, quadratic_two_real_roots)
 	int root_count = plnm_roots(&quad, roots);
 	
 	cr_assert(root_count == 2);
-	cr_assert(PLNM_IS_CLOSE(creal(roots[0]), 4));
+	cr_assert(PLNM_IS_CLOSE(creal(roots[0]), 1));
+	cr_assert(PLNM_IS_CLOSE(creal(roots[1]), -35));
 	
 	free(quad);
 }
