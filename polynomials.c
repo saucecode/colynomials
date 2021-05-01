@@ -101,13 +101,13 @@ int plnm_product(polynomial_t *left, polynomial_t *right, polynomial_t *result) 
 	return order_result;
 }
 
-int plnm_order(polynomial_t *y) {
+size_t plnm_order(polynomial_t *y) {
 	return *((unsigned int *) *y);
 }
 
 void plnm_scale(polynomial_t *y, coeff_t x)
 {
-	for (int i = 0; i <= plnm_order(y); i++)
+	for (size_t i = 0; i <= plnm_order(y); i++)
 		(*y)[i + 1] *= x;
 }
 

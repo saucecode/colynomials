@@ -23,7 +23,7 @@ typedef coeff_t* polynomial_t; // typedef because its a pointer type
 void plnm_init(polynomial_t *y, int order);
 
 // Returns the polynomial's order.
-int plnm_order(polynomial_t *y);
+size_t plnm_order(polynomial_t *y);
 
 /*
 	Calculates all roots of the polynomial and stores them
