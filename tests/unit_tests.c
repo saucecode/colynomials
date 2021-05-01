@@ -11,8 +11,8 @@ Test(plnm_scale, quadraticValue1)
 	plnm_init_quadratic(&quad, 2, 3, 5);
 	plnm_scale(&quad, 2);
 	cr_expect(quad[1] == 4);
-        cr_expect(quad[2] == 6);
-        cr_expect(quad[3] == 10);
+	cr_expect(quad[2] == 6);
+	cr_expect(quad[3] == 10);
 	free(quad);
 }
 
