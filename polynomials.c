@@ -101,13 +101,13 @@ int plnm_product(polynomial_t *left, polynomial_t *right, polynomial_t *result) 
 	return order_result;
 }
 
-int plnm_order(polynomial_t *y) {
+size_t plnm_order(polynomial_t *y) {
 	return *((unsigned int *) *y);
 }
 
 void plnm_scale(polynomial_t *y, coeff_t x)
 {
-	for (int i = 0; i <= plnm_order(y); i++)
+	for (size_t i = 0; i <= plnm_order(y); i++)
 		(*y)[i + 1] *= x;
 }
 
@@ -118,4 +118,11 @@ void plnm_copy(polynomial_t *copy, polynomial_t *source) {
 		plnm_init(copy, plnm_order(source));
 	
 	memcpy(*copy, *source, plnm_sizeof(source));
+}
+
+coeff_t plnm_at(polynomial_t *y, size_t pos)
+{
+	if (pos == 0 || plnm_order(y) + 1 < pos)
+		return 0;
+	return (*y)[pos];
 }

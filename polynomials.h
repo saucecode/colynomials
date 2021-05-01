@@ -2,6 +2,7 @@
 #define _saucecodes_polynomials_h
 
 #include <tgmath.h>
+#include <stddef.h>
 
 #define coeff_t double
 #define root_t coeff_t complex
@@ -22,7 +23,7 @@ typedef coeff_t* polynomial_t; // typedef because its a pointer type
 void plnm_init(polynomial_t *y, int order);
 
 // Returns the polynomial's order.
-int plnm_order(polynomial_t *y);
+size_t plnm_order(polynomial_t *y);
 
 /*
 	Calculates all roots of the polynomial and stores them
@@ -73,4 +74,6 @@ int plnm_roots_quadratic(polynomial_t *y, root_t *buffer);
 // Scales a polynomial in place by coeff x
 void plnm_scale(polynomial_t *y, coeff_t x);
 
+// Returns the member of polynomial y at position pos
+coeff_t plnm_at(polynomial_t *y, size_t pos);
 #endif
